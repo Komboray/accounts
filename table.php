@@ -15,23 +15,22 @@ include("index.php");
 </head>
 <body>
 
-  <form action="<?php htmlspecialchars($_SERVER["PHP_SELF"])?>" method = "POST"> 
+    <div class="table-cell">
+        <form action="<?php htmlspecialchars($_SERVER["PHP_SELF"])?>" method = "POST"> 
 
-  
+       
+         <label for="company-name">Company name</label>
+         <input type="text" name ="company-name" placeholder = "TUMA ENTERPRISE" required>
+       
+             <p>
+                ADJUSTED TRIAL BALANCE
+             </p>
 
+                    <p>
+                    <input type="date" name="date" id="date">
+                    </p>
 
-<p>
-   <label for="company-name">Company name</label>
-   <input type="text" name ="company-name" required>
-</p>
-<p>
- ADJUSTED TRIAL BALANCE
-</p>
-
-<p>
- AS AT Dec 31, 2023
-</p>
-
+    </div>
     <div class="table-box">
 
         <div class="table-row table-head">
@@ -51,7 +50,7 @@ include("index.php");
 
         <div class="table-row">
             <div class="table-cell">
-                <label for="cash"><p>Cash</p></label>   
+                <label for="cash"><h4>Cash</h4></label>   
             </div>
 
             <div class="table-cell">
@@ -66,7 +65,7 @@ include("index.php");
 
         <div class="table-row">
             <div class="table-cell">
-                <label for="acc-rec"><p>Accounts Receivable</p></label>
+                <label for="acc-rec"><h4>Accounts Receivable</h4></label>
                 
             </div>
 
@@ -82,7 +81,7 @@ include("index.php");
 
         <div class="table-row">
             <div class="table-cell">
-               <label for="other"><p>Other receivables</p></label>
+               <label for="other"><h4>Other receivables</h4></label>
             </div>
 
             <div class="table-cell">
@@ -97,7 +96,7 @@ include("index.php");
 
         <div class="table-row">
             <div class="table-cell">
-            <label for="pre-paid"><p>Pre-paid expenses</p></label>
+            <label for="pre-paid"><h4>Pre-paid expenses</h4></label>
                 
             </div>
 
@@ -113,7 +112,7 @@ include("index.php");
 
         <div class="table-row">
             <div class="table-cell">
-              <label for="prop-plant"><p>Property plant & equipment</p></label>   
+              <label for="prop-plant"><h4>Property plant & equipment</h4></label>   
             </div>
 
             <div class="table-cell">
@@ -128,7 +127,7 @@ include("index.php");
 
         <div class="table-row">
             <div class="table-cell">
-            <label for="intangible"><p>Inatangible</p></label>
+            <label for="intangible"><h4>Inatangible</h4></label>
             </div>
 
             <div class="table-cell">
@@ -159,7 +158,7 @@ include("index.php");
 
         <div class="table-row">
             <div class="table-cell">
-            <label for="acc-pay"><p>Accounts payable</p></label>
+            <label for="acc-pay"><h4>Accounts payable</h4></label>
             </div>
 
             <div class="table-cell">
@@ -174,7 +173,7 @@ include("index.php");
 
         <div class="table-row">
             <div class="table-cell">
-                <label for="tax-pay"><p>Taxes payable</p></label>
+                <label for="tax-pay"><h4>Taxes payable</h4></label>
             </div>
 
             <div class="table-cell">
@@ -189,7 +188,7 @@ include("index.php");
 
         <div class="table-row">
             <div class="table-cell">
-               <label for="acc-exp"><p>Accrued expenses</p></label>
+               <label for="acc-exp"><h4>Accrued expenses<h4></label>
             </div>
 
             <div class="table-cell">
@@ -398,6 +397,21 @@ include("index.php");
 
         </div>
 
+        <div class="table-row">
+            <div class="table-cell">
+             <label for="equityTLabel"><h3>TOTAL</h3></label>  
+            </div>
+
+            <div class="table-cell">
+            
+            </div>
+
+            <div class="table-cell">
+               <h3 id = "equityTLabel"></h3>
+            </div>
+
+        </div>
+
         <div class="table-row table-total">
             <div class="table-cell">
              <label for="total"><h2>TOTAL</h2></label>
@@ -408,20 +422,27 @@ include("index.php");
             </div>
 
             <div class="table-cell">
-                <h2 id = "creditTotal">95</h2>
+                <h2 id = "creditTotal"></h2>
             </div>
 
            </div>
-             <a href=""  class="hero-btn"><input type="submit" value = "Finish balance sheet" id = "submit" name = "submit"></a>
+            <input type="submit" value = "Finish balance sheet" id = "submit" name = "submit" class="hero-btn">
+            
 
             <div><br>
 
             <div class = "main-skills">
-                <input type="button" value="assets" id = "assets" onclick = "add()" >
+                <input type="button" value="assets" id = "assets" >
             </div>
             <div>
-                <input type="button" value="liable" id = "liable" >
-            </div>
+                <input type="button" value="liable" id = "liable">
+        
+                <br>
+                <input type="button" value="equity" id = "equity">
+                <br>
+                <input type="button" value="totals" id = "totals">
+              </div>
+            
 
         </div>
         
@@ -429,28 +450,6 @@ include("index.php");
     <!-- this causes the top part to move to the middle the div below-->
 
   </form> 
-  <script>
-    function add(){
-
-     let cash =  Number(document.getElementById("cash").value);
-
-     let accRec = Number(document.getElementById("acc-rec").value);
-     let other = Number(document.getElementById("other").value);
-     let prePaid = Number(document.getElementById("pre-paid").value);
-     let propPlant = Number(document.getElementById("prop-plant").value);
-     let intangible = Number(document.getElementById("intangible").value);
-     
-     let assestT = document.getElementById("assetT");
-
-     let assetBtn = document.getElementById("assets");
-
-     var debitTotal= cash + accRec + other + prePaid + propPlant + intangible;
-     console.log(debitTotal);
-     return assestT.innerHTML = debitTotal;
-     }
-     
-     
-     </script>
      <script src = "script.js"></script>
    
   
